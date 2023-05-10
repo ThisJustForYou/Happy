@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card</title>
+    <!-- Google Font-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .card {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="startButton" type="button" class="startButton">Start</button>
+
+    <div id="light" style="display: none;">
+        <a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
+        <video id="VisaChipCardVideo" width="600" controls>
+            <source src="./Rick Rolled (Short Version).mp4" type="video/mp4">
+            <!--Browser does not support <video> tag -->
+        </video>
+    </div>
+    <audio id="music" autoplay loop>
+        <source src="./audiomass-output.mp3" type="audio/mp3">
+    </audio>
+
+    <div id="fade" onClick="lightbox_close();"></div>
+    <div class="card" id="cardContent">
+            <div class="outside">
+                <div class="front">
+                    <p>Happy Birthday berli</p>
+                    <div class="cake">
+                        <div class="top-layer"></div>
+                        <div class="middle-layer"></div>
+                        <div class="bottom-layer"></div>
+                        <div class="candle"></div>
+                    </div>
+                </div>
+                <div class="back"></div>
+            </div>
+            <div class="inside">
+                <p>Wishing you a very happy birthday filled with love and laughter.</p>
+                <p>Seeing your smile is happiness for me</p>
+                <p>And I wish you happiness in every second of your life</p>
+                <h1 onclick="lightbox_open();">&#127873;</h1>
+                <button onclick="lightbox_open()" type="button">Click to Open your present</button>
+            </div>
+    </div>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', startCard);
+
+        function startCard() {
+            document.getElementById('startButton').style.display = 'none';
+            document.getElementById('cardContent').style.display = 'block';
+            let audio = document.getElementById("music");
+            audio.play();
+        }
+
+        window.document.onkeydown = function (e) {
+            if (!e) {
+                e = event;
+            }
+            if (e.keyCode == 27) {
+                lightbox_close();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            let audio = document.getElementById("music");
+            audio.pause();
+        });
+        function lightbox_open() {
+            let lightBoxVideo = document.getElementById("VisaChipCardVideo");
+            let audio = document.getElementById("music");
+            window.scrollTo(0, 0);
+            document.getElementById('light').style.display = 'block';
+            document.getElementById('fade').style.display = 'block';
+            lightBoxVideo.play();
+            audio.pause();
+        }
+
+
+        function lightbox_close() {
+            let lightBoxVideo = document.getElementById("VisaChipCardVideo");
+            let audio = document.getElementById("music")
+            document.getElementById('light').style.display = 'none';
+            document.getElementById('fade').style.display = 'none';
+            lightBoxVideo.pause();
+            audio.play();
+        }
+</script>
